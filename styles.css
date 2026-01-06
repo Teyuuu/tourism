@@ -877,6 +877,7 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 12px;
 }
 
@@ -922,7 +923,7 @@ body {
 
 .qr-code {
     width: 150px;
-    height: 150px;
+    height: 180px;
     border-radius: 12px;
     background: white;
     padding: 15px;
