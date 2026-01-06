@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Government of Bacoor - Tourism & Cultural Affairs</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <span class="top-bar-text">Republic of the Philippines | Province of Cavite</span>
+                <span class="top-bar-phone">(046) 417-1234</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo-section">
+                    <img src="images/bacoor-seal.png" alt="Bacoor City Seal" class="logo-icon">
+                    <div class="logo-text">
+                        <h1>City Government of Bacoor</h1>
+                        <p>Tourism & Cultural Affairs</p>
+                    </div>
+                </div>
+                <div class="nav-links">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#events" class="nav-link">Events</a>
+                    <a href="#requirements" class="nav-link">Requirements</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                    <button class="btn-apply">Apply for Event</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-label">City Government of Bacoor</div>
+            <h2 class="hero-title">Department of Tourism and Cultural Affairs</h2>
+            <p class="hero-tagline">Empowering community events and celebrating Bacoor's rich cultural heritage through streamlined event management and tourism initiatives</p>
+            <button class="btn-learn-more">Learn More</button>
+        </div>
+    </section>
+
+    <!-- Event Statistics Section -->
+    <section id="events" class="statistics-section">
+        <div class="container">
+            <h2 class="section-title">Event Statistics</h2>
+            <div class="stats-cards">
+                <div class="stat-card stat-card-orange">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-number">142</div>
+                    <div class="stat-label">Total Events</div>
+                </div>
+                <div class="stat-card stat-card-blue">
+                    <div class="stat-icon">📄</div>
+                    <div class="stat-number">28</div>
+                    <div class="stat-label">Pending Applications</div>
+                </div>
+                <div class="stat-card stat-card-orange">
+                    <div class="stat-icon">📍</div>
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Active Venues</div>
+                </div>
+                <div class="stat-card stat-card-blue">
+                    <div class="stat-icon">ℹ️</div>
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Event Categories</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics & Insights Section -->
+    <section class="analytics-section">
+        <div class="container">
+            <h2 class="section-title">Analytics & Insights</h2>
+            <p class="section-subtitle">Track event trends and category distribution throughout the year</p>
+            <div class="analytics-content">
+                <div class="analytics-box">
+                    <h3 class="chart-title">Monthly Events Overview</h3>
+                    <canvas id="lineChart"></canvas>
+                </div>
+                <div class="analytics-box">
+                    <h3 class="chart-title">Events by Category</h3>
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Public Events Section -->
+    <section class="public-events-section">
+        <div class="container">
+            <div class="events-hero">
+                <h2 class="events-title">Bacoor City Public Events</h2>
+                <p class="events-subtitle">Experience the vibrant culture and community spirit of Bacoor</p>
+            </div>
+            <div class="events-cards">
+                <div class="event-card">
+                    <div class="event-image-container">
+                        <div class="event-image event-image-1"></div>
+                        <span class="event-label">Cultural Festival</span>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-name">Bacoor Public Festival</h3>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <span class="event-icon">📅</span>
+                                <span>January 15-17, 2025</span>
+                            </div>
+                            <div class="event-detail">
+                                <span class="event-icon">📍</span>
+                                <span>Bacoor City Hall Grounds</span>
+                            </div>
+                        </div>
+                        <p class="event-description">Join us for the annual Bacoor Public Festival celebrating our city's rich culture and heritage.</p>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image-container">
+                        <div class="event-image event-image-2"></div>
+                        <span class="event-label">New Year Celebration</span>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-name">New Year's Eve Pyro Fiesta</h3>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <span class="event-icon">📅</span>
+                                <span>December 31, 2024</span>
+                            </div>
+                            <div class="event-detail">
+                                <span class="event-icon">📍</span>
+                                <span>Bacoor Bay Area</span>
+                            </div>
+                        </div>
+                        <p class="event-description">Welcome the new year with a spectacular fireworks display and celebration.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Registration Requirements Section -->
+    <section id="requirements" class="requirements-section">
+        <div class="container">
+            <h2 class="section-title">Event Registration Requirements</h2>
+            <p class="requirements-description">Review the essential requirements needed for your event application. Click on each item for detailed information.</p>
+            <div class="requirements-list">
+                <div class="requirement-item">
+                    <div class="requirement-icon">📋</div>
+                    <div class="requirement-content">
+                        <h3 class="requirement-title">Organizer Credential or Pertinent Company</h3>
+                    </div>
+                    <div class="requirement-chevron">▼</div>
+                </div>
+                <div class="requirement-item">
+                    <div class="requirement-icon">📋</div>
+                    <div class="requirement-content">
+                        <h3 class="requirement-title">Letter from Organizer Indicating</h3>
+                    </div>
+                    <div class="requirement-chevron">▼</div>
+                </div>
+                <div class="requirement-item">
+                    <div class="requirement-icon">📋</div>
+                    <div class="requirement-content">
+                        <h3 class="requirement-title">Traffic Management Including</h3>
+                    </div>
+                    <div class="requirement-chevron">▼</div>
+                </div>
+                <div class="requirement-item">
+                    <div class="requirement-icon">📋</div>
+                    <div class="requirement-content">
+                        <h3 class="requirement-title">Emergency Management Plan</h3>
+                    </div>
+                    <div class="requirement-chevron">▼</div>
+                </div>
+                <div class="requirement-item">
+                    <div class="requirement-icon">📋</div>
+                    <div class="requirement-content">
+                        <h3 class="requirement-title">Letter of Indorsement / Support</h3>
+                    </div>
+                    <div class="requirement-chevron">▼</div>
+                </div>
+                <div class="requirement-item">
+                    <div class="requirement-icon">📋</div>
+                    <div class="requirement-content">
+                        <h3 class="requirement-title">Letter to DOLE Cluster Details</h3>
+                    </div>
+                    <div class="requirement-chevron">▼</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ready to Host Section -->
+    <section class="ready-to-host-section">
+        <div class="ready-to-host-content">
+            <h2 class="ready-title">Ready to Host Your Event?</h2>
+            <p class="ready-description">Submit your event application today and let us help make your event a success in Bacoor City. Our streamlined process ensures quick approval and comprehensive support.</p>
+            <button class="btn-apply-permit">Apply for Event Permit</button>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <p class="feature-text">Simple Application Process</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <p class="feature-text">Fast Approval</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <p class="feature-text">Full Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== EMERGENCY HOTLINES ========================== -->
+    <section class="emergency-hotlines-section">
+        <div class="container">
+            <h2 class="hotlines-title">Emergency Hotlines</h2>
+            <div class="hotlines-grid">
+                <div class="hotline-card">
+                    <div class="hotline-icon">
+                        <img src="images/logos/bdrrmo-logo .png" alt="BDRRMO Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='⚠️';">
+                    </div>
+                    <h3 class="hotline-name">Bacoor Disaster Risk Reduction and Management Office (BDRRMO)</h3>
+                    <a href="tel:+63464170727" class="hotline-number">(046) 417-0727</a>
+                </div>
+                <div class="hotline-card">
+                    <div class="hotline-icon">
+                        <img src="images/logos/pnp-logo.png" alt="PNP Logo">
+                    </div>
+                    <h3 class="hotline-name">Philippine National Police - Bacoor City (PNP)</h3>
+                    <a href="tel:+63464176366" class="hotline-number">(046) 417-6366</a>
+                </div>
+                <div class="hotline-card">
+                    <div class="hotline-icon">
+                        <img src="images/logos/cio-logo.png" alt="City Information Office Logo">
+                    </div>
+                    <h3 class="hotline-name">City Information Office</h3>
+                    <a href="tel:+63464814120" class="hotline-number">(046) 481-4120</a>
+                </div>
+                <div class="hotline-card">
+                    <div class="hotline-icon">
+                        <img src="images/logos/bfp-logo.png" alt="BFP Logo">
+                    </div>
+                    <h3 class="hotline-name">Bureau of Fire Protection - Bacoor City (BFP)</h3>
+                    <a href="tel:+63464176060" class="hotline-number">(046) 417-6060</a>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- ========================== FOOTER ========================== -->
+        <footer id="contact" class="global-footer">
+        <div class="footer-container">
+            <!-- Left Column: Bacoor City EGOV™ Information -->
+            <div class="footer-left">
+                <div class="footer-brand">
+                    <div class="brand-header">
+                        <img src="images/bacoor-seal.png" alt="Bacoor City Seal" class="city-seal">
+                        <div class="brand-text">
+                            <h3 class="footer-title">BACOOR CITY EGOV™</h3>
+                            <div class="footer-title-underline"></div>
+                            <p class="footer-subtitle">Government of Bacoor</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-contact">
+                    <div class="contact-item">
+                        <span class="contact-text">Contact us at <a href="mailto:info@Bacoor.gov.ph" class="contact-link">info@Bacoor.gov.ph</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                        <span class="contact-text">Bacoor City of Cavite, Philippines</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+                        <span class="contact-text">+0356 567 890</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Middle Column: Helpful Links -->
+            <div class="footer-middle">
+                <h3 class="footer-section-title">Helpful Link</h3>
+                <div class="footer-section-underline"></div>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                    <li><a href="#" class="footer-link">Support</a></li>
+                    <li><a href="#" class="footer-link">FAQ</a></li>
+                    <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            
+            <!-- Right Column: QR Codes and Badges -->
+            <div class="footer-right">
+                <div class="right-column-horizontal">
+                    <!-- Strike Scan Me Section -->
+                    <div class="qr-section">
+                        <h3 class="footer-section-title">Strike Scan Me</h3>
+                        <div class="footer-section-underline"></div>
+                        <div class="qr-container">
+                            <img src="images/footer/strike-qr.png" alt="Strike QR Code" class="qr-code" onclick="openQRPopup()">
+                            <p class="qr-hint">Click to enlarge</p>
+                        </div>
+                    </div>
+                    
+                    <!-- DPO/DPS Registered Badge -->
+                    <div class="dpo-badge-section">
+                        <img src="images/footer/dpo-badge.png" alt="DPO/DPS Registered Badge" class="dpo-badge">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Copyright Section -->
+        <div class="footer-copyright">
+            <p class="copyright-text">Copyright © 2025 Bacoor E-Governance Department. All rights reserved</p>
+        </div>
+    
+        <!-- QR Code Popup Modal -->
+        <div id="qrPopup" class="qr-popup">
+            <div class="qr-popup-content">
+                <span class="qr-popup-close" onclick="closeQRPopup()">&times;</span>
+                <h3>Strike QR Code</h3>
+                <img src="images/footer/strike-qr.png" alt="Strike QR Code" class="qr-popup-image">
+                <p>Scan this QR code with your mobile device</p>
+            </div>
+        </div>
+    
+        </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 15L5 10L6.41 8.59L10 12.17L13.59 8.59L15 10L10 15Z" fill="white"/>
+        </svg>
+    </button>
+
+    <!-- ========================== SCRIPTS ========================== -->
+    <script src="js/homepage.js"></script>
+    <script src="js/footer.js"></script>
+</body>
+</html>
