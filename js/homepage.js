@@ -1,3 +1,37 @@
+// Hamburger Menu Toggle
+const hamburgerMenu = document.querySelector('.hamburger-menu');
+const navLinks = document.querySelector('.nav-links');
+const navOverlay = document.createElement('div');
+navOverlay.className = 'nav-overlay';
+document.body.appendChild(navOverlay);
+
+if (hamburgerMenu && navLinks) {
+    hamburgerMenu.addEventListener('click', () => {
+        hamburgerMenu.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close menu when clicking overlay
+    navOverlay.addEventListener('click', () => {
+        hamburgerMenu.classList.remove('active');
+        navLinks.classList.remove('active');
+        navOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    // Close menu when clicking nav links
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburgerMenu.classList.remove('active');
+            navLinks.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+}
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -98,8 +132,17 @@ function drawLineChart() {
     if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
-    const width = canvas.width = canvas.offsetWidth;
-    const height = canvas.height = 300;
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    const width = rect.width;
+    const isMobile = window.innerWidth <= 768;
+    const height = isMobile ? 250 : 300;
+    
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.scale(dpr, dpr);
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
     
     // Chart data (monthly events)
     const data = [12, 15, 18, 14, 22, 20, 16, 19, 21, 17, 23, 25];
@@ -109,8 +152,8 @@ function drawLineChart() {
     // Clear canvas
     ctx.clearRect(0, 0, width, height);
     
-    // Chart area
-    const padding = 40;
+    // Responsive padding
+    const padding = isMobile ? 30 : 40;
     const chartWidth = width - padding * 2;
     const chartHeight = height - padding * 2;
     const chartX = padding;
@@ -134,25 +177,28 @@ function drawLineChart() {
     
     // Draw Y-axis labels
     ctx.fillStyle = '#666';
-    ctx.font = '12px sans-serif';
+    const fontSize = isMobile ? '10px' : '12px';
+    ctx.font = fontSize + ' sans-serif';
     ctx.textAlign = 'right';
     for (let i = 0; i <= 4; i++) {
         const value = (maxValue / 4) * i;
         const y = chartY + chartHeight - (chartHeight / 4) * i;
-        ctx.fillText(Math.round(value).toString(), chartX - 10, y + 4);
+        ctx.fillText(Math.round(value).toString(), chartX - (isMobile ? 5 : 10), y + 4);
     }
     
     // Draw X-axis labels
     ctx.textAlign = 'center';
     const monthWidth = chartWidth / months.length;
+    const monthFontSize = isMobile ? '9px' : '12px';
+    ctx.font = monthFontSize + ' sans-serif';
     months.forEach((month, i) => {
         const x = chartX + monthWidth * i + monthWidth / 2;
-        ctx.fillText(month, x, chartY + chartHeight + 20);
+        ctx.fillText(month, x, chartY + chartHeight + (isMobile ? 15 : 20));
     });
     
     // Draw line
-    ctx.strokeStyle = '#2a4a6f';
-    ctx.lineWidth = 3;
+    ctx.strokeStyle = '#014696';
+    ctx.lineWidth = isMobile ? 2.5 : 3;
     ctx.beginPath();
     data.forEach((value, i) => {
         const x = chartX + monthWidth * i + monthWidth / 2;
@@ -166,20 +212,21 @@ function drawLineChart() {
     ctx.stroke();
     
     // Draw points
-    ctx.fillStyle = '#2a4a6f';
+    ctx.fillStyle = '#014696';
+    const pointRadius = isMobile ? 4 : 5;
     data.forEach((value, i) => {
         const x = chartX + monthWidth * i + monthWidth / 2;
         const y = chartY + chartHeight - (value / maxValue) * chartHeight;
         ctx.beginPath();
-        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.arc(x, y, pointRadius, 0, Math.PI * 2);
         ctx.fill();
     });
     
     // Draw legend
-    ctx.fillStyle = '#2a4a6f';
-    ctx.font = '14px sans-serif';
+    ctx.fillStyle = '#014696';
+    ctx.font = (isMobile ? '12px' : '14px') + ' sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillText('→ Events', chartX, chartY - 10);
+    ctx.fillText('→ Events', chartX, chartY - (isMobile ? 5 : 10));
 }
 
 // Draw Pie Chart
@@ -188,21 +235,30 @@ function drawPieChart() {
     if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
-    const width = canvas.width = canvas.offsetWidth;
-    const height = canvas.height = 300;
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    const width = rect.width;
+    const isMobile = window.innerWidth <= 768;
+    const height = isMobile ? 250 : 300;
+    
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.scale(dpr, dpr);
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
     
     // Chart data
     const data = [
-        { label: 'Cultural', value: 35, color: '#2a4a6f' },
+        { label: 'Cultural', value: 35, color: '#014696' },
         { label: 'Sports', value: 25, color: '#4caf50' },
-        { label: 'Corporate', value: 20, color: '#ff6b35' },
+        { label: 'Corporate', value: 20, color: '#ffd700' },
         { label: 'Religious', value: 15, color: '#e53935' },
         { label: 'Others', value: 5, color: '#9c27b0' }
     ];
     
     const centerX = width / 2;
     const centerY = height / 2;
-    const radius = Math.min(width, height) / 2 - 60;
+    const radius = Math.min(width, height) / 2 - (isMobile ? 40 : 60);
     
     // Clear canvas
     ctx.clearRect(0, 0, width, height);
@@ -221,35 +277,40 @@ function drawPieChart() {
         ctx.fillStyle = item.color;
         ctx.fill();
         
-        // Draw label
-        const labelAngle = currentAngle + sliceAngle / 2;
-        const labelX = centerX + Math.cos(labelAngle) * (radius * 0.7);
-        const labelY = centerY + Math.sin(labelAngle) * (radius * 0.7);
-        
-        ctx.fillStyle = '#fff';
-        ctx.font = 'bold 12px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(item.label, labelX, labelY - 5);
-        ctx.fillText(item.value + '%', labelX, labelY + 10);
+        // Draw label (only if not too small)
+        if (!isMobile || radius > 60) {
+            const labelAngle = currentAngle + sliceAngle / 2;
+            const labelX = centerX + Math.cos(labelAngle) * (radius * 0.7);
+            const labelY = centerY + Math.sin(labelAngle) * (radius * 0.7);
+            
+            ctx.fillStyle = '#fff';
+            const labelFontSize = isMobile ? '10px' : '12px';
+            ctx.font = 'bold ' + labelFontSize + ' sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(item.label, labelX, labelY - 5);
+            ctx.fillText(item.value + '%', labelX, labelY + 10);
+        }
         
         currentAngle += sliceAngle;
     });
     
     // Draw legend
-    const legendX = width - 150;
+    const legendX = isMobile ? width - 120 : width - 150;
     const legendY = 20;
+    const legendFontSize = isMobile ? '10px' : '12px';
     data.forEach((item, index) => {
-        const y = legendY + index * 25;
+        const y = legendY + index * (isMobile ? 20 : 25);
         
         // Color box
         ctx.fillStyle = item.color;
-        ctx.fillRect(legendX, y, 15, 15);
+        const boxSize = isMobile ? 12 : 15;
+        ctx.fillRect(legendX, y, boxSize, boxSize);
         
         // Label
         ctx.fillStyle = '#333';
-        ctx.font = '12px sans-serif';
+        ctx.font = legendFontSize + ' sans-serif';
         ctx.textAlign = 'left';
-        ctx.fillText(item.label + ' ' + item.value + '%', legendX + 20, y + 12);
+        ctx.fillText(item.label + ' ' + item.value + '%', legendX + (isMobile ? 15 : 20), y + (isMobile ? 10 : 12));
     });
 }
 
