@@ -214,6 +214,9 @@ function initializeForm() {
         emergencyTemplateLink.href = 'https://docs.google.com/document/d/1tTppWiU5bjL9hFlR9SCNe_-NEoByHXI5t1WlP1DCtcw/edit?tab=t.0'; // Replace with actual template link
     }
     
+    // Add number-only validation for phone number fields
+    setupNumberOnlyValidation();
+    
     // Form submission
     const form = document.getElementById('eventApplicationForm');
     if (form) {
@@ -851,3 +854,56 @@ document.addEventListener('keydown', function(e) {
         }
     }
 });
+
+// Setup number-only validation for fields that should only accept numbers
+function setupNumberOnlyValidation() {
+    // Phone number fields - only allow numbers, spaces, dashes, parentheses, and plus sign
+    const phoneFields = [
+        'contactCellphone',
+        'contactTelephone'
+    ];
+    
+    phoneFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            // Allow only numbers and common phone number characters
+            field.addEventListener('input', function(e) {
+                // Remove any characters that are not numbers, spaces, dashes, parentheses, or plus
+                let value = this.value.replace(/[^0-9\s\-()\+]/g, '');
+                this.value = value;
+            });
+            
+            // Prevent paste of non-numeric characters
+            field.addEventListener('paste', function(e) {
+                e.preventDefault();
+                const paste = (e.clipboardData || window.clipboardData).getData('text');
+                // Only allow numbers and common phone number characters
+                const cleaned = paste.replace(/[^0-9\s\-()\+]/g, '');
+                this.value = cleaned;
+            });
+            
+            // Prevent non-numeric key presses (allow backspace, delete, tab, arrow keys, etc.)
+            field.addEventListener('keydown', function(e) {
+                // Allow: backspace, delete, tab, escape, enter, home, end, arrow keys
+                if ([8, 9, 27, 13, 46, 35, 36, 37, 38, 39, 40].indexOf(e.keyCode) !== -1 ||
+                    // Allow Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+                    (e.keyCode === 65 && e.ctrlKey === true) ||
+                    (e.keyCode === 67 && e.ctrlKey === true) ||
+                    (e.keyCode === 86 && e.ctrlKey === true) ||
+                    (e.keyCode === 88 && e.ctrlKey === true)) {
+                    return;
+                }
+                // Ensure that it is a number, space, dash, parenthesis, or plus and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && 
+                    (e.keyCode < 96 || e.keyCode > 105) &&
+                    e.keyCode !== 32 && // space
+                    e.keyCode !== 45 && // dash
+                    e.keyCode !== 40 && // left parenthesis
+                    e.keyCode !== 41 && // right parenthesis
+                    e.keyCode !== 187) { // plus
+                    e.preventDefault();
+                }
+            });
+        }
+    });
+}
