@@ -35,13 +35,17 @@ if (hamburgerMenu && navLinks) {
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        const href = this.getAttribute('href');
+        // Only process if href is a valid selector (starts with # and has valid characters)
+        if (href && href.startsWith('#') && href.length > 1) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
     });
 });
@@ -110,9 +114,251 @@ document.querySelectorAll('.stat-card').forEach((card, index) => {
 
 // Requirements Accordion
 document.querySelectorAll('.requirement-item').forEach(item => {
-    item.addEventListener('click', function() {
-        this.classList.toggle('active');
+    const header = item.querySelector('.requirement-header');
+    if (header) {
+        header.addEventListener('click', function(e) {
+            // Don't toggle if clicking on the template button
+            if (e.target.closest('.template-button')) {
+                return;
+            }
+            // Close other items (optional - remove if you want multiple open)
+            const isActive = item.classList.contains('active');
+            document.querySelectorAll('.requirement-item').forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            // Toggle current item
+            if (!isActive) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+});
+
+// Template Button Handler
+document.querySelectorAll('.template-button').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent accordion toggle
+        const templateType = this.getAttribute('data-template');
+        
+        if (templateType === 'traffic') {
+            // Open image modal for traffic management plan
+            openImageModal();
+        } else {
+            // For other templates, use the regular modal
+            openTemplateModal(templateType);
+        }
     });
+});
+
+// Emergency Management Plan Link - Update the href with your actual link
+const emergencyLink = document.getElementById('emergencyLink');
+if (emergencyLink) {
+    // Update this URL with your actual emergency management plan link
+    emergencyLink.href = 'https://docs.google.com/document/d/1tTppWiU5bjL9hFlR9SCNe_-NEoByHXI5t1WlP1DCtcw/edit?tab=t.0'; // Replace with actual link
+    emergencyLink.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent accordion toggle
+        // Link will navigate naturally
+    });
+}
+
+// Image Modal Functions for Traffic Management Plan
+let currentZoom = 1;
+let isDragging = false;
+let startX = 0;
+let startY = 0;
+let scrollLeft = 0;
+let scrollTop = 0;
+
+function openImageModal() {
+    const modal = document.getElementById('imageModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        // Reset zoom when opening
+        resetZoom();
+    }
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        // Reset zoom when closing
+        resetZoom();
+    }
+}
+
+function zoomImage(delta) {
+    const img = document.getElementById('trafficPlanImage');
+    const modalBody = document.getElementById('imageModalBody');
+    if (!img || !modalBody) return;
+    
+    currentZoom = Math.max(0.5, Math.min(3, currentZoom + delta));
+    img.style.transform = `scale(${currentZoom})`;
+    
+    // Update cursor style based on zoom level
+    if (currentZoom > 1) {
+        modalBody.classList.add('zoom-active');
+    } else {
+        modalBody.classList.remove('zoom-active');
+    }
+    
+    updateZoomButtons();
+}
+
+function resetZoom() {
+    const img = document.getElementById('trafficPlanImage');
+    const modalBody = document.getElementById('imageModalBody');
+    if (!img || !modalBody) return;
+    
+    currentZoom = 1;
+    img.style.transform = 'scale(1)';
+    modalBody.classList.remove('zoom-active');
+    updateZoomButtons();
+    
+    // Reset scroll position
+    modalBody.scrollLeft = 0;
+    modalBody.scrollTop = 0;
+}
+
+function updateZoomButtons() {
+    const zoomOutBtn = document.getElementById('zoomOutBtn');
+    const zoomInBtn = document.getElementById('zoomInBtn');
+    
+    if (zoomOutBtn) {
+        zoomOutBtn.disabled = currentZoom <= 0.5;
+        zoomOutBtn.style.opacity = currentZoom <= 0.5 ? '0.5' : '1';
+        zoomOutBtn.style.cursor = currentZoom <= 0.5 ? 'not-allowed' : 'pointer';
+    }
+    
+    if (zoomInBtn) {
+        zoomInBtn.disabled = currentZoom >= 3;
+        zoomInBtn.style.opacity = currentZoom >= 3 ? '0.5' : '1';
+        zoomInBtn.style.cursor = currentZoom >= 3 ? 'not-allowed' : 'pointer';
+    }
+}
+
+// Mouse wheel zoom
+const imageModalBody = document.getElementById('imageModalBody');
+if (imageModalBody) {
+    imageModalBody.addEventListener('wheel', function(e) {
+        if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -0.1 : 0.1;
+            zoomImage(delta);
+        }
+    }, { passive: false });
+    
+    // Pan/drag functionality when zoomed
+    imageModalBody.addEventListener('mousedown', function(e) {
+        if (currentZoom > 1) {
+            isDragging = true;
+            startX = e.pageX - imageModalBody.offsetLeft;
+            startY = e.pageY - imageModalBody.offsetTop;
+            scrollLeft = imageModalBody.scrollLeft;
+            scrollTop = imageModalBody.scrollTop;
+        }
+    });
+    
+    imageModalBody.addEventListener('mouseleave', function() {
+        isDragging = false;
+    });
+    
+    imageModalBody.addEventListener('mouseup', function() {
+        isDragging = false;
+    });
+    
+    imageModalBody.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - imageModalBody.offsetLeft;
+        const y = e.pageY - imageModalBody.offsetTop;
+        const walkX = (x - startX) * 2;
+        const walkY = (y - startY) * 2;
+        imageModalBody.scrollLeft = scrollLeft - walkX;
+        imageModalBody.scrollTop = scrollTop - walkY;
+    });
+}
+
+// Template Modal Functions (kept for future use)
+function openTemplateModal(templateType) {
+    const modal = document.getElementById('templateModal');
+    const modalContent = document.getElementById('templateModalContent');
+    
+    if (!modal || !modalContent) return;
+    
+    const templates = {
+        program: {
+            title: 'Program/Schedule Template',
+            description: 'Download or view the template for creating your event program and schedule of activities.',
+            link: '#'
+        }
+    };
+    
+    const template = templates[templateType];
+    if (!template) return;
+    
+    modalContent.innerHTML = `
+        <div class="template-modal-header">
+            <h3>${template.title}</h3>
+            <button class="template-modal-close" onclick="closeTemplateModal()">&times;</button>
+        </div>
+        <div class="template-modal-body">
+            <p>${template.description}</p>
+            <div class="template-modal-actions">
+                <a href="${template.link}" target="_blank" class="template-download-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 9H15V3H9V9H5L12 16L19 9Z" fill="currentColor"/>
+                        <path d="M5 18V20H19V18H5Z" fill="currentColor"/>
+                    </svg>
+                    <span>Download Template</span>
+                </a>
+                <button class="template-view-btn" onclick="window.open('${template.link}', '_blank')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2ZM18 20H6V4H13V9H18V20Z" fill="currentColor"/>
+                    </svg>
+                    <span>View Online</span>
+                </button>
+            </div>
+        </div>
+    `;
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeTemplateModal() {
+    const modal = document.getElementById('templateModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+// Close modals when clicking outside
+window.addEventListener('click', function(e) {
+    const templateModal = document.getElementById('templateModal');
+    const imageModal = document.getElementById('imageModal');
+    
+    if (e.target === templateModal) {
+        closeTemplateModal();
+    }
+    if (e.target === imageModal) {
+        closeImageModal();
+    }
+});
+
+// Close modals with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeTemplateModal();
+        closeImageModal();
+    }
 });
 
 // Apply for Event Permit button

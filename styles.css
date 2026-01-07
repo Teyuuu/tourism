@@ -317,6 +317,15 @@ body {
 .stat-icon {
     font-size: 48px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-icon svg {
+    width: 48px;
+    height: 48px;
+    color: inherit;
 }
 
 .stat-number {
@@ -489,6 +498,15 @@ body {
 
 .event-icon {
     font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-icon svg {
+    width: 18px;
+    height: 18px;
+    color: inherit;
 }
 
 .event-description {
@@ -520,14 +538,13 @@ body {
 .requirement-item {
     background: white;
     border: 2px solid #e0e0e0;
+    border-left: 4px solid transparent;
     border-radius: 10px;
-    padding: 20px;
+    padding: 0;
     margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
     cursor: pointer;
     transition: all 0.3s;
+    overflow: hidden;
 }
 
 .requirement-item:hover {
@@ -535,16 +552,35 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.requirement-item.active {
+    border-left-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.requirement-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
 .requirement-icon {
     width: 50px;
     height: 50px;
-    background: #014696;
+    background: #3b82f6;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
     flex-shrink: 0;
+    color: white;
+}
+
+.requirement-icon svg {
+    width: 24px;
+    height: 24px;
+    color: white;
 }
 
 .requirement-content {
@@ -562,10 +598,338 @@ body {
     color: #2a4a6f;
     font-size: 14px;
     transition: transform 0.3s;
+    flex-shrink: 0;
 }
 
 .requirement-item.active .requirement-chevron {
     transform: rotate(180deg);
+}
+
+.requirement-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 20px;
+}
+
+.requirement-item.active .requirement-details {
+    max-height: 500px;
+    padding: 0 20px 20px 20px;
+}
+
+.requirement-description {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+    padding-left: 70px;
+}
+
+.template-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: transparent;
+    border: 2px solid #3b82f6;
+    border-radius: 8px;
+    color: #3b82f6;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 70px;
+    text-decoration: none;
+}
+
+.template-button:hover {
+    background: #3b82f6;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.template-button svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+/* Template Modal */
+.template-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.template-modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.template-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.template-modal-header h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a3a5f;
+}
+
+.template-modal-close {
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.template-modal-close:hover {
+    background: #f1f5f9;
+    color: #1a3a5f;
+}
+
+.template-modal-body {
+    padding: 30px;
+}
+
+.template-modal-body p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 30px 0;
+}
+
+.template-modal-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.template-download-btn,
+.template-view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: none;
+}
+
+.template-download-btn {
+    background: #3b82f6;
+    color: white;
+    flex: 1;
+    justify-content: center;
+}
+
+.template-download-btn:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.template-view-btn {
+    background: white;
+    color: #3b82f6;
+    border: 2px solid #3b82f6;
+    flex: 1;
+    justify-content: center;
+}
+
+.template-view-btn:hover {
+    background: #eff6ff;
+    transform: translateY(-2px);
+}
+
+.template-download-btn svg,
+.template-view-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+/* Image Modal for Traffic Management Plan */
+.image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.image-modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modalSlideIn 0.3s ease;
+}
+
+.image-modal-header {
+    padding: 20px 30px;
+    border-bottom: 2px solid #f1f5f9;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.image-modal-header h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a3a5f;
+    flex: 1;
+}
+
+.image-zoom-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.zoom-btn {
+    background: #3b82f6;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.zoom-btn:hover {
+    background: #2563eb;
+    transform: scale(1.05);
+}
+
+.zoom-btn:active {
+    transform: scale(0.95);
+}
+
+.zoom-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.image-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    font-size: 32px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    transition: all 0.3s ease;
+    line-height: 1;
+    padding: 0;
+}
+
+.image-modal-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+}
+
+.image-modal-body {
+    padding: 20px;
+    overflow: auto;
+    max-height: calc(90vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    cursor: default;
+    position: relative;
+}
+
+.image-modal-body.zoom-active {
+    cursor: grab;
+}
+
+.image-modal-body.zoom-active:active {
+    cursor: grabbing;
+}
+
+.image-modal-body img {
+    max-width: none;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    transform: scale(1);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 /* Ready to Host Section */
@@ -632,6 +996,15 @@ body {
 .feature-icon {
     font-size: 48px;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon svg {
+    width: 48px;
+    height: 48px;
+    color: inherit;
 }
 
 .feature-text {
@@ -1290,11 +1663,119 @@ body {
     }
 
     .requirement-item {
+        padding: 0;
+    }
+
+    .requirement-header {
         padding: 15px;
+        gap: 15px;
+    }
+
+    .requirement-icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .requirement-icon svg {
+        width: 20px;
+        height: 20px;
     }
 
     .requirement-title {
         font-size: 16px;
+    }
+
+    .requirement-description {
+        padding-left: 0;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .template-button {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    .requirement-item.active .requirement-details {
+        padding: 0 15px 15px 15px;
+    }
+
+    .template-modal-content {
+        margin: 20px;
+        max-width: calc(100% - 40px);
+    }
+
+    .template-modal-header {
+        padding: 20px;
+    }
+
+    .template-modal-header h3 {
+        font-size: 20px;
+    }
+
+    .template-modal-body {
+        padding: 20px;
+    }
+
+    .template-modal-actions {
+        flex-direction: column;
+    }
+
+    .template-download-btn,
+    .template-view-btn {
+        width: 100%;
+    }
+
+    .image-modal-content {
+        max-width: 95vw;
+        max-height: 95vh;
+    }
+
+    .image-modal-header {
+        padding: 15px 20px;
+    }
+
+    .image-modal-header {
+        padding: 15px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .image-modal-header h3 {
+        font-size: 18px;
+        width: 100%;
+    }
+
+    .image-zoom-controls {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .zoom-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .zoom-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .image-modal-close {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        font-size: 28px;
+    }
+
+    .image-modal-body {
+        max-height: calc(95vh - 100px);
+        padding: 15px;
     }
 
     /* Ready to Host Section */

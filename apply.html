@@ -45,11 +45,62 @@
         </div>
     </nav>
 
+    <!-- Privacy Agreement Modal -->
+    <div id="privacyModal" class="privacy-modal">
+        <div class="privacy-modal-content">
+            <h1 class="form-registry-title">BACOOR PUBLIC EVENT REGISTRY</h1>
+            <div class="form-reference-info">
+                <div class="reference-number">CGBCR-BCHATO-007-F01.01</div>
+                <div class="reference-date">April 05, 2024</div>
+            </div>
+            
+            <div class="form-intro-text">
+                <p>This registration form was created pursuant to City of Bacoor Executive Order No. 17-2023 s. 2023 also known as "An Order Prescribing for the Procedures in the Registration and Approval of Public Events and Gatherings in Public Places within the City of Bacoor, Establishing an Executive Secretariat for the Implementation thereof, and for Other Purposes".</p>
+                <p>A public event registry is hereby established for purpose of monitoring of all public events in the City of Bacoor which may result to traffics jams, and other types of public disturbances that might result to bodily harm, traffic congestion or death.</p>
+                <p>Public event shall refer to activities open to and may be attended by the general public and which include concerts, motorcades, parades, rallies, races, marketing campaigns, mall-sponsored activities such as expositions, fairs, festivals, entertainment, cause-related, fundraising or leisure events, extracurricular activities of schools or learning institutions, religious processions, funeral processions and the likes to be held on public roads and other public outdoor spaces with more than fifty (50) participants in the said activities.</p>
+            </div>
+
+            <!-- Email Address Field -->
+            <div class="form-group email-section">
+                <label for="applicantEmail">Email Address <span class="required">*</span></label>
+                <input type="email" id="applicantEmail" name="applicantEmail" placeholder="Enter your email address" required>
+                <span class="field-hint">(Email verification may be required)</span>
+                <div class="error-message" id="emailError" style="display: none;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="currentColor"/>
+                    </svg>
+                    <span>Please enter your email address before proceeding</span>
+                </div>
+            </div>
+
+            <!-- Data Privacy Notice -->
+            <div class="data-privacy-section">
+                <h3 class="privacy-title">DATA PRIVACY NOTICE</h3>
+                <div class="privacy-content">
+                    <p>The City of Bacoor Executive Secretariat for Public Event Registration, in line with the Data Privacy Act of 2012, is committed to protect and secure personal information obtained in the process of performance of its mandate. The personal information you provide manually herein will be processed and utilized solely for documentation, facilitation of future transactions, profiling and market research, or for reportorial requirements/compliance to governmental rules and regulations. Collected personal information will be kept/stored and accessed only by authorized personnel and will not be shared with any outside parties unless consent is secured. Information will be stored for three (3) years after which physical records shall be disposed or destroyed following the disposition process provided by the National Archives of the Philippines.</p>
+                </div>
+                <div class="privacy-question">
+                    <p>Do you agree to the terms stated in the Data Privacy Notice?</p>
+                </div>
+                <div class="privacy-agreement">
+                    <button type="button" class="privacy-btn privacy-agree" id="privacyAgree">I Agree</button>
+                    <button type="button" class="privacy-btn privacy-disagree" id="privacyDisagree">I Disagree</button>
+                </div>
+                <div class="error-message" id="privacyError" style="display: none;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="currentColor"/>
+                    </svg>
+                    <span>You must agree to the Data Privacy Notice to proceed with the application</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Form Container -->
-    <div class="form-page-container">
+    <div class="form-page-container" id="formContainer" style="display: none;">
         <div class="container">
             <h1 class="form-page-title">Event Application Form</h1>
-            <p class="form-page-subtitle">Please fill out the complete Event Profile Sheet to apply for your event in Bacoor.</p>
+            <p class="form-page-subtitle">Please review the following information before proceeding with your application.</p>
 
             <!-- Progress Indicator -->
             <div class="progress-indicator">
@@ -80,7 +131,11 @@
                 <div class="form-step active" data-step="1">
                     <div class="form-card">
                         <div class="form-card-header">
-                            <span class="form-icon">📅</span>
+                            <span class="form-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 4H5C3.89 4 3 4.9 3 6V20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20ZM7 11H9V13H7V11ZM11 11H13V13H11V11ZM15 11H17V13H15V11Z" fill="currentColor"/>
+                                </svg>
+                            </span>
                             <h2 class="form-card-title">EVENT PROFILE SHEET</h2>
                         </div>
                         <p class="form-card-subtitle">Basic Event Information</p>
@@ -95,7 +150,11 @@
                                 <label for="eventDate">Date (Month, Day, Year) <span class="required">*</span></label>
                                 <div class="input-with-icon">
                                     <input type="date" id="eventDate" name="eventDate" required>
-                                    <span class="input-icon">📅</span>
+                                    <span class="input-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M19 4H5C3.89 4 3 4.9 3 6V20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20ZM7 11H9V13H7V11ZM11 11H13V13H11V11ZM15 11H17V13H15V11Z" fill="currentColor"/>
+                                        </svg>
+                                    </span>
                                 </div>
                             </div>
                             
@@ -103,7 +162,11 @@
                                 <label for="eventTime">Time <span class="required">*</span></label>
                                 <div class="input-with-icon">
                                     <input type="time" id="eventTime" name="eventTime" required>
-                                    <span class="input-icon">🕐</span>
+                                    <span class="input-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.99 2C6.47 2 2 6.48 2 12C2 17.52 6.47 22 11.99 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 11.99 2ZM12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20ZM12.5 7H11V13L16.25 16.15L17 14.92L12.5 12.25V7Z" fill="currentColor"/>
+                                        </svg>
+                                    </span>
                                 </div>
                             </div>
                             
@@ -124,7 +187,11 @@
                 <div class="form-step" data-step="2">
                     <div class="form-card">
                         <div class="form-card-header">
-                            <span class="form-icon">👤</span>
+                            <span class="form-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
+                                </svg>
+                            </span>
                             <h2 class="form-card-title">EVENT PROFILE SHEET</h2>
                         </div>
                         <p class="form-card-subtitle">Contact Person & Organizer Information</p>
@@ -167,7 +234,11 @@
                 <div class="form-step" data-step="3">
                     <div class="form-card">
                         <div class="form-card-header">
-                            <span class="form-icon">👥</span>
+                            <span class="form-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16 11C17.66 11 18.99 9.66 18.99 8C18.99 6.34 17.66 5 16 5C14.34 5 13 6.34 13 8C13 9.66 14.34 11 16 11ZM8 11C9.66 11 10.99 9.66 10.99 8C10.99 6.34 9.66 5 8 5C6.34 5 5 6.34 5 8C5 9.66 6.34 11 8 11ZM8 13C5.67 13 1 14.17 1 16.5V19H15V16.5C15 14.17 10.33 13 8 13ZM16 13C15.71 13 15.38 13.02 15.03 13.05C16.19 13.89 17 15.02 17 16.5V19H23V16.5C23 14.17 18.33 13 16 13Z" fill="currentColor"/>
+                                </svg>
+                            </span>
                             <h2 class="form-card-title">Event Details & Guest Information</h2>
                         </div>
                         <p class="form-card-subtitle">Event Description, Audience, Guests, and Media</p>
@@ -226,33 +297,67 @@
                 <div class="form-step" data-step="4">
                     <div class="form-card">
                         <div class="form-card-header">
-                            <span class="form-icon">📎</span>
+                            <span class="form-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.5 6V17.5C16.5 19.71 14.71 21.5 12.5 21.5C10.29 21.5 8.5 19.71 8.5 17.5V5C8.5 3.62 9.62 2.5 11 2.5C12.38 2.5 13.5 3.62 13.5 5V15.5C13.5 16.05 13.05 16.5 12.5 16.5C11.95 16.5 11.5 16.05 11.5 15.5V6H10V15.5C10 16.88 11.12 18 12.5 18C13.88 18 15 16.88 15 15.5V5C15 2.79 13.21 1 11 1C8.79 1 7 2.79 7 5V17.5C7 20.54 9.46 23 12.5 23C15.54 23 18 20.54 18 17.5V6H16.5Z" fill="currentColor"/>
+                                </svg>
+                            </span>
                             <h2 class="form-card-title">Document Attachments</h2>
                         </div>
                         <p class="form-card-subtitle">Upload required documents for your event application</p>
                         
                         <div class="form-grid">
                             <div class="form-group full-width">
-                                <label for="barangayLetter">Barangay Letter <span class="required">*</span></label>
-                                <p class="field-hint">Upload the barangay letter of endorsement</p>
+                                <label for="barangayLetter">Copy of Letter (received by Barangay that has judisdiction over the venue)<span class="required">*</span></label>
+                                <p class="field-hint">Upload the letter of endorsement</p>
                                 <input type="file" id="barangayLetter" name="barangayLetter" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
                             </div>
                             
                             <div class="form-group full-width">
-                                <label for="programSchedule">Program Schedule <span class="required">*</span></label>
-                                <p class="field-hint">Upload the event program schedule</p>
-                                <input type="file" id="programSchedule" name="programSchedule" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+                                <label>Program Schedule <span class="required">*</span></label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="programScheduleApplicable" value="applicable" id="programApplicable" required>
+                                        <span>Applicable</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="programScheduleApplicable" value="not-applicable" id="programNotApplicable" required>
+                                        <span>Not Applicable</span>
+                                    </label>
+                                </div>
+                                <div class="program-schedule-attachment" id="programScheduleAttachment" style="display: none;">
+                                    <p class="field-hint">Upload the event program schedule</p>
+                                    <input type="file" id="programSchedule" name="programSchedule" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                                </div>
                             </div>
                             
                             <div class="form-group full-width">
-                                <label for="trafficPlan">Traffic Management Plan <span class="required">*</span></label>
-                                <p class="field-hint">Upload the traffic management plan</p>
-                                <input type="file" id="trafficPlan" name="trafficPlan" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+                                <label>Traffic Management Plan <span class="required">*</span></label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="trafficPlanApplicable" value="applicable" id="trafficApplicable" required>
+                                        <span>Applicable</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="trafficPlanApplicable" value="not-applicable" id="trafficNotApplicable" required>
+                                        <span>Not Applicable</span>
+                                    </label>
+                                </div>
+                                <div class="traffic-plan-attachment" id="trafficPlanAttachment" style="display: none;">
+                                    <div class="attachment-header">
+                                        <p class="field-hint">Upload the traffic management plan</p>
+                                        <button type="button" class="btn-view-sample" id="viewTrafficSample">View Sample</button>
+                                    </div>
+                                    <input type="file" id="trafficPlan" name="trafficPlan" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                                </div>
                             </div>
                             
                             <div class="form-group full-width">
                                 <label for="emergencyPlan">Emergency Management Plan <span class="required">*</span></label>
-                                <p class="field-hint">Upload the emergency management plan</p>
+                                <div class="attachment-header">
+                                    <p class="field-hint">Upload the emergency management plan</p>
+                                    <a href="#" class="btn-view-sample" id="emergencyTemplateLink" target="_blank">Template</a>
+                                </div>
                                 <input type="file" id="emergencyPlan" name="emergencyPlan" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
                             </div>
                         </div>
@@ -273,7 +378,11 @@
     <div id="successPage" class="success-page" style="display: none;">
         <div class="container">
             <div class="success-card">
-                <div class="success-icon">✓</div>
+                <div class="success-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="currentColor"/>
+                    </svg>
+                </div>
                 <h2 class="success-title">Application Submitted!</h2>
                 <p class="success-message">Your event application has been successfully submitted. Our team will review your application and contact you within 5-7 business days.</p>
                 <button class="btn-submit-another" onclick="location.reload()">Submit Another Application</button>
@@ -284,7 +393,11 @@
     <!-- Confirmation Modal -->
     <div id="confirmationModal" class="confirmation-modal">
         <div class="confirmation-modal-content">
-            <div class="confirmation-icon">⚠️</div>
+            <div class="confirmation-icon">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 21H23L12 2L1 21ZM13 18H11V16H13V18ZM13 14H11V10H13V14Z" fill="currentColor"/>
+                </svg>
+            </div>
             <h3 class="confirmation-title">Confirm Submission</h3>
             <p class="confirmation-message">Are you sure you want to submit your event application? Please review all information before proceeding.</p>
             <div class="confirmation-buttons">
@@ -296,7 +409,11 @@
 
     <!-- Toast Notification -->
     <div id="toast" class="toast">
-        <span class="toast-icon">✓</span>
+        <span class="toast-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="currentColor"/>
+            </svg>
+        </span>
         <span class="toast-message">Event application submitted successfully!</span>
     </div>
 
@@ -395,6 +512,36 @@
             <path d="M10 15L5 10L6.41 8.59L10 12.17L13.59 8.59L15 10L10 15Z" fill="white"/>
         </svg>
     </button>
+
+    <!-- Traffic Management Plan Sample Modal -->
+    <div id="trafficSampleModal" class="image-modal">
+        <div class="image-modal-content">
+            <button class="image-modal-close" onclick="closeTrafficSampleModal()">&times;</button>
+            <div class="image-modal-header">
+                <h3>Traffic Management Plan Sample</h3>
+                <div class="image-zoom-controls">
+                    <button class="zoom-btn" id="trafficZoomOutBtn" onclick="zoomTrafficImage(-0.1)" title="Zoom Out">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14ZM7 9H12V10H7V9Z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                    <button class="zoom-btn" id="trafficZoomResetBtn" onclick="resetTrafficZoom()" title="Reset Zoom">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 4V1L8 5L12 9V6C15.31 6 18 8.69 18 12C18 15.31 15.31 18 12 18C8.69 18 6 15.31 6 12H4C4 16.42 7.58 20 12 20C16.42 20 20 16.42 20 12C20 7.58 16.42 4 12 4Z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                    <button class="zoom-btn" id="trafficZoomInBtn" onclick="zoomTrafficImage(0.1)" title="Zoom In">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14ZM12 8H11V11H8V12H11V15H12V12H15V11H12V8Z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="image-modal-body" id="trafficImageModalBody">
+                <img src="images/sample/sample-route.jpg" alt="Traffic Management Plan Sample" id="trafficSampleImage">
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="js/homepage.js"></script>
