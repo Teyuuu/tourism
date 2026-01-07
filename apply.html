@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Application Form - City Government of Bacoor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="form-styles.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <span class="top-bar-text">Republic of the Philippines | Province of Cavite</span>
+                <span class="top-bar-phone">(046) 417-1234</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo-section">
+                    <img src="images/bacoor-seal.png" alt="Bacoor City Seal" class="logo-icon">
+                    <div class="logo-text">
+                        <h1>City Government of Bacoor</h1>
+                        <p>Tourism & Cultural Affairs</p>
+                    </div>
+                </div>
+                <button class="hamburger-menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#events" class="nav-link">Events</a>
+                    <a href="index.html#requirements" class="nav-link">Requirements</a>
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                    <button class="btn-apply">Apply for Event</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Form Container -->
+    <div class="form-page-container">
+        <div class="container">
+            <h1 class="form-page-title">Event Application Form</h1>
+            <p class="form-page-subtitle">Please fill out the complete Event Profile Sheet to apply for your event in Bacoor.</p>
+
+            <!-- Progress Indicator -->
+            <div class="progress-indicator">
+                <div class="progress-step active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <span class="step-label">Event Info</span>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-circle">2</div>
+                    <span class="step-label">Contact Info</span>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-circle">3</div>
+                    <span class="step-label">Event Details</span>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="4">
+                    <div class="step-circle">4</div>
+                    <span class="step-label">Attachments</span>
+                </div>
+            </div>
+
+            <!-- Form Steps -->
+            <form id="eventApplicationForm" class="event-form" novalidate>
+                <!-- Step 1: Event Info -->
+                <div class="form-step active" data-step="1">
+                    <div class="form-card">
+                        <div class="form-card-header">
+                            <span class="form-icon">📅</span>
+                            <h2 class="form-card-title">EVENT PROFILE SHEET</h2>
+                        </div>
+                        <p class="form-card-subtitle">Basic Event Information</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="eventTitle">Title of Event <span class="required">*</span></label>
+                                <input type="text" id="eventTitle" name="eventTitle" placeholder="Enter event title" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="eventDate">Date (Month, Day, Year) <span class="required">*</span></label>
+                                <div class="input-with-icon">
+                                    <input type="date" id="eventDate" name="eventDate" required>
+                                    <span class="input-icon">📅</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="eventTime">Time <span class="required">*</span></label>
+                                <div class="input-with-icon">
+                                    <input type="time" id="eventTime" name="eventTime" required>
+                                    <span class="input-icon">🕐</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="eventDuration">Duration of Event <span class="required">*</span></label>
+                                <input type="text" id="eventDuration" name="eventDuration" placeholder="e.g., 3 hours, 2 days" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="eventVenue">Venue (Exact) <span class="required">*</span></label>
+                                <input type="text" id="eventVenue" name="eventVenue" placeholder="Exact venue location" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Contact Info -->
+                <div class="form-step" data-step="2">
+                    <div class="form-card">
+                        <div class="form-card-header">
+                            <span class="form-icon">👤</span>
+                            <h2 class="form-card-title">EVENT PROFILE SHEET</h2>
+                        </div>
+                        <p class="form-card-subtitle">Contact Person & Organizer Information</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="contactName">Name of Contact Person <span class="required">*</span></label>
+                                <input type="text" id="contactName" name="contactName" placeholder="Full name" required>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="contactAddress">Address of Contact Person <span class="required">*</span></label>
+                                <input type="text" id="contactAddress" name="contactAddress" placeholder="Complete address" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contactEmail">Email of Contact Person <span class="required">*</span></label>
+                                <input type="email" id="contactEmail" name="contactEmail" placeholder="email@example.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contactCellphone">Cellphone Number of Contact Person <span class="required">*</span></label>
+                                <input type="tel" id="contactCellphone" name="contactCellphone" placeholder="09XX XXX XXXX" required>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="contactTelephone">Telephone Number of Contact Person <span class="optional">(Optional)</span></label>
+                                <input type="tel" id="contactTelephone" name="contactTelephone" placeholder="Telephone number">
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="organizerBackground">Background of Organizer/Organization <span class="required">*</span></label>
+                                <textarea id="organizerBackground" name="organizerBackground" rows="4" placeholder="Provide background information about the organizer or organization" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Event Details -->
+                <div class="form-step" data-step="3">
+                    <div class="form-card">
+                        <div class="form-card-header">
+                            <span class="form-icon">👥</span>
+                            <h2 class="form-card-title">Event Details & Guest Information</h2>
+                        </div>
+                        <p class="form-card-subtitle">Event Description, Audience, Guests, and Media</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="eventDescription">Background / Description of Event <span class="required">*</span></label>
+                                <p class="field-hint">Provide a detailed description of your event</p>
+                                <textarea id="eventDescription" name="eventDescription" rows="4" placeholder="Enter event description" required></textarea>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="audienceProfile">Audience Profile (Please include expected number of guests) <span class="required">*</span></label>
+                                <p class="field-hint">Describe your target audience and expected number of attendees</p>
+                                <textarea id="audienceProfile" name="audienceProfile" rows="4" placeholder="Enter audience profile" required></textarea>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="guestsList">List of Guests Attending <span class="required">*</span></label>
+                                <p class="field-hint">Provide a list or description of guests attending</p>
+                                <textarea id="guestsList" name="guestsList" rows="4" placeholder="Enter list of guests" required></textarea>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="vipsList">List of VIPs Attending (if any)</label>
+                                <p class="field-hint">List any VIP guests (optional)</p>
+                                <textarea id="vipsList" name="vipsList" rows="4" placeholder="Enter list of VIPs"></textarea>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label>Media Coverage <span class="required">*</span></label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="mediaCoverage" value="none" checked required>
+                                        <span>None</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="mediaCoverage" value="in-house" required>
+                                        <span>In-House Coverage</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="mediaCoverage" value="press" required>
+                                        <span>Invite Press/Media</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-note">
+                                <p><strong>Note:</strong> Document attachments (Barangay Letter, Program Schedule, Traffic & Emergency Plans) will be uploaded in Step 4.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Attachments -->
+                <div class="form-step" data-step="4">
+                    <div class="form-card">
+                        <div class="form-card-header">
+                            <span class="form-icon">📎</span>
+                            <h2 class="form-card-title">Document Attachments</h2>
+                        </div>
+                        <p class="form-card-subtitle">Upload required documents for your event application</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="barangayLetter">Barangay Letter <span class="required">*</span></label>
+                                <p class="field-hint">Upload the barangay letter of endorsement</p>
+                                <input type="file" id="barangayLetter" name="barangayLetter" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="programSchedule">Program Schedule <span class="required">*</span></label>
+                                <p class="field-hint">Upload the event program schedule</p>
+                                <input type="file" id="programSchedule" name="programSchedule" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="trafficPlan">Traffic Management Plan <span class="required">*</span></label>
+                                <p class="field-hint">Upload the traffic management plan</p>
+                                <input type="file" id="trafficPlan" name="trafficPlan" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="emergencyPlan">Emergency Management Plan <span class="required">*</span></label>
+                                <p class="field-hint">Upload the emergency management plan</p>
+                                <input type="file" id="emergencyPlan" name="emergencyPlan" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="form-navigation">
+                    <button type="button" class="btn-previous" id="btnPrevious" disabled>Previous</button>
+                    <button type="button" class="btn-next" id="btnNext">Next</button>
+                    <button type="submit" class="btn-submit" id="btnSubmit" style="display: none;">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Page (Hidden by default) -->
+    <div id="successPage" class="success-page" style="display: none;">
+        <div class="container">
+            <div class="success-card">
+                <div class="success-icon">✓</div>
+                <h2 class="success-title">Application Submitted!</h2>
+                <p class="success-message">Your event application has been successfully submitted. Our team will review your application and contact you within 5-7 business days.</p>
+                <button class="btn-submit-another" onclick="location.reload()">Submit Another Application</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="confirmation-modal">
+        <div class="confirmation-modal-content">
+            <div class="confirmation-icon">⚠️</div>
+            <h3 class="confirmation-title">Confirm Submission</h3>
+            <p class="confirmation-message">Are you sure you want to submit your event application? Please review all information before proceeding.</p>
+            <div class="confirmation-buttons">
+                <button type="button" class="btn-cancel" id="btnCancelConfirm">Cancel</button>
+                <button type="button" class="btn-confirm" id="btnConfirmSubmit">Confirm & Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message">Event application submitted successfully!</span>
+    </div>
+
+    <!-- Help Button -->
+    <button class="help-button" aria-label="Help">
+        <span>?</span>
+    </button>
+
+    <!-- Footer -->
+    <footer id="contact" class="global-footer">
+        <div class="footer-container">
+            <!-- Left Column: Bacoor City EGOV™ Information -->
+            <div class="footer-left">
+                <div class="footer-brand">
+                    <div class="brand-header">
+                        <img src="images/bacoor-seal.png" alt="Bacoor City Seal" class="city-seal">
+                        <div class="brand-text">
+                            <h3 class="footer-title">BACOOR CITY EGOV™</h3>
+                            <div class="footer-title-underline"></div>
+                            <p class="footer-subtitle">Government of Bacoor</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-contact">
+                    <div class="contact-item">
+                        <span class="contact-text">Contact us at <a href="mailto:info@Bacoor.gov.ph" class="contact-link">info@Bacoor.gov.ph</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                        <span class="contact-text">Bacoor City of Cavite, Philippines</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+                        <span class="contact-text">+0356 567 890</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Middle Column: Helpful Links -->
+            <div class="footer-middle">
+                <h3 class="footer-section-title">Helpful Link</h3>
+                <div class="footer-section-underline"></div>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                    <li><a href="#" class="footer-link">Support</a></li>
+                    <li><a href="#" class="footer-link">FAQ</a></li>
+                    <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            
+            <!-- Right Column: QR Codes and Badges -->
+            <div class="footer-right">
+                <div class="right-column-horizontal">
+                    <!-- Strike Scan Me Section -->
+                    <div class="qr-section">
+                        <h3 class="footer-section-title">Strike Scan Me</h3>
+                        <div class="footer-section-underline"></div>
+                        <div class="qr-container">
+                            <img src="images/footer/strike-qr.png" alt="Strike QR Code" class="qr-code" onclick="openQRPopup()">
+                            <p class="qr-hint">Click to enlarge</p>
+                        </div>
+                    </div>
+                    
+                    <!-- DPO/DPS Registered Badge -->
+                    <div class="dpo-badge-section">
+                        <img src="images/footer/dpo-badge.png" alt="DPO/DPS Registered Badge" class="dpo-badge">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Copyright Section -->
+        <div class="footer-copyright">
+            <p class="copyright-text">Copyright © 2025 Bacoor E-Governance Department. All rights reserved</p>
+        </div>
+    
+        <!-- QR Code Popup Modal -->
+        <div id="qrPopup" class="qr-popup">
+            <div class="qr-popup-content">
+                <span class="qr-popup-close" onclick="closeQRPopup()">&times;</span>
+                <h3>Strike QR Code</h3>
+                <img src="images/footer/strike-qr.png" alt="Strike QR Code" class="qr-popup-image">
+                <p>Scan this QR code with your mobile device</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 15L5 10L6.41 8.59L10 12.17L13.59 8.59L15 10L10 15Z" fill="white"/>
+        </svg>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/homepage.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/form.js"></script>
+</body>
+</html>
