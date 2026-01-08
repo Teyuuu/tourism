@@ -21,10 +21,35 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (privacyAgreeBtn) {
         privacyAgreeBtn.addEventListener('click', () => {
+            const emailInput = document.getElementById('applicantEmail');
+            
+            // Check if email is empty
+            if (!emailInput || !emailInput.value.trim()) {
+                showError('emailError', 'Please enter your email address before agreeing');
+                if (emailInput) {
+                    emailInput.classList.add('error');
+                    emailInput.focus();
+                }
+                return; // Don't proceed if email is empty
+            }
+            
+            // Validate email format
+            if (!validateEmailFormat(emailInput.value.trim())) {
+                showError('emailError', 'Please enter a valid email address');
+                emailInput.classList.add('error');
+                emailInput.focus();
+                return; // Don't proceed if email is invalid
+            }
+            
+            // If email is valid, proceed with agreement
             privacyAgreed = true;
             privacyAgreeBtn.classList.add('active');
             privacyDisagreeBtn.classList.remove('active');
             hideError('privacyError');
+            hideError('emailError');
+            if (emailInput) {
+                emailInput.classList.remove('error');
+            }
             checkAndProceed();
         });
     }
@@ -35,6 +60,15 @@ document.addEventListener('DOMContentLoaded', () => {
             privacyDisagreeBtn.classList.add('active');
             privacyAgreeBtn.classList.remove('active');
             showError('privacyError', 'You must agree to the Data Privacy Notice to proceed with the application');
+        });
+    }
+    
+    // Cancel button
+    const privacyCancelBtn = document.getElementById('privacyCancel');
+    if (privacyCancelBtn) {
+        privacyCancelBtn.addEventListener('click', () => {
+            // Redirect to homepage
+            window.location.href = 'index.html';
         });
     }
     

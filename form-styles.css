@@ -232,6 +232,27 @@
     border-color: #2563eb;
 }
 
+.privacy-cancel {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.privacy-cancel-btn {
+    background: white;
+    color: #dc2626;
+    border-color: #dc2626;
+    min-width: 140px;
+}
+
+.privacy-cancel-btn:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-color: #b91c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+}
+
 /* Error Messages */
 .error-message {
     display: flex;
@@ -1018,6 +1039,14 @@
     }
 
     .privacy-btn {
+        width: 100%;
+    }
+
+    .privacy-cancel {
+        width: 100%;
+    }
+
+    .privacy-cancel-btn {
         width: 100%;
     }
 
