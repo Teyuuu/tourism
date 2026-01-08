@@ -451,6 +451,23 @@
     min-height: 100px;
 }
 
+.char-counter {
+    font-size: 12px;
+    color: #666;
+    text-align: right;
+    margin-top: -4px;
+    transition: color 0.3s ease;
+}
+
+.char-counter.warning {
+    color: #f59e0b;
+}
+
+.char-counter.error {
+    color: #dc2626;
+    font-weight: 600;
+}
+
 .input-with-icon {
     position: relative;
 }

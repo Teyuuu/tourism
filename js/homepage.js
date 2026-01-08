@@ -70,13 +70,7 @@ if (scrollToTopBtn) {
     });
 }
 
-// Apply for Event button functionality
-const applyBtn = document.querySelector('.btn-apply');
-if (applyBtn) {
-    applyBtn.addEventListener('click', () => {
-        alert('Event application form will open here.');
-    });
-}
+// Apply for Event button functionality - removed alert, now navigates directly to apply.html
 
 // Learn More button functionality
 const learnMoreBtn = document.querySelector('.btn-learn-more');

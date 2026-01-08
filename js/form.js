@@ -217,6 +217,12 @@ function initializeForm() {
     // Add number-only validation for phone number fields
     setupNumberOnlyValidation();
     
+    // Setup character limit validation and counters
+    setupCharacterLimitValidation();
+    
+    // Setup phone number validation
+    setupPhoneNumberValidation();
+    
     // Form submission
     const form = document.getElementById('eventApplicationForm');
     if (form) {
@@ -410,13 +416,72 @@ function validateCurrentStep() {
                 field.classList.add('error');
                 // Red border removed for better visual
             } else {
-                field.classList.remove('error');
+                // Character limits map
+                const characterLimits = {
+                    'eventTitle': 200,
+                    'eventDuration': 100,
+                    'eventVenue': 200,
+                    'contactName': 100,
+                    'contactAddress': 200,
+                    'organizerBackground': 1000,
+                    'eventDescription': 1500,
+                    'audienceProfile': 1000,
+                    'guestsList': 1000,
+                    'vipsList': 1000
+                };
+                
+                // Field name map for error messages
+                const fieldNames = {
+                    'eventTitle': 'Title of Event',
+                    'eventDuration': 'Duration of Event',
+                    'eventVenue': 'Venue',
+                    'contactName': 'Name of Contact Person',
+                    'contactAddress': 'Address of Contact Person',
+                    'organizerBackground': 'Background of Organizer/Organization',
+                    'eventDescription': 'Background / Description of Event',
+                    'audienceProfile': 'Audience Profile',
+                    'guestsList': 'List of Guests Attending',
+                    'vipsList': 'List of VIPs Attending'
+                };
+                
+                // Check character limits for text/textarea fields
+                if (characterLimits[field.id] && field.value.length > characterLimits[field.id]) {
+                    isValid = false;
+                    field.classList.add('error');
+                    const fieldName = fieldNames[field.id] || field.id;
+                    showToast(`${fieldName} must not exceed ${characterLimits[field.id]} characters`, 'error');
+                } else if (field.id === 'contactCellphone') {
+                    // Check cellphone digit count
+                    const digitCount = (field.value.match(/\d/g) || []).length;
+                    if (digitCount > 11) {
+                        isValid = false;
+                        field.classList.add('error');
+                        showToast('Cellphone Number must not exceed 11 digits', 'error');
+                    } else {
+                        field.classList.remove('error');
+                    }
+                } else if (field.id === 'contactTelephone' && field.value.trim()) {
+                    // Check telephone digit count (only if field has value since it's optional)
+                    const digitCount = (field.value.match(/\d/g) || []).length;
+                    if (digitCount > 12) {
+                        isValid = false;
+                        field.classList.add('error');
+                        showToast('Telephone Number must not exceed 12 digits', 'error');
+                    } else {
+                        field.classList.remove('error');
+                    }
+                } else {
+                    // Remove error class for fields that passed validation
+                    field.classList.remove('error');
+                }
             }
         }
     });
     
     if (!isValid) {
-        showToast('Please fill in all required fields', 'error');
+        if (!document.querySelector('.form-step[data-step="' + currentStep + '"] .form-group input.error, .form-step[data-step="' + currentStep + '"] .form-group textarea.error')) {
+            showToast('Please fill in all required fields', 'error');
+        }
     }
     
     return isValid;
@@ -537,10 +602,26 @@ function validateAllSteps() {
     let allValid = true;
     let firstInvalidStep = null;
     
+    // Character limits map
+    const characterLimits = {
+        'eventTitle': 200,
+        'eventDuration': 100,
+        'eventVenue': 200,
+        'contactName': 100,
+        'contactAddress': 200,
+        'organizerBackground': 1000,
+        'eventDescription': 1500,
+        'audienceProfile': 1000,
+        'guestsList': 1000,
+        'vipsList': 1000
+    };
+    
     for (let i = 1; i <= totalSteps; i++) {
         const stepElement = document.querySelector(`.form-step[data-step="${i}"]`);
         if (stepElement) {
             const requiredFields = stepElement.querySelectorAll('input[required], textarea[required]');
+            // Also check optional fields with character limits if they have values
+            const optionalFieldsWithLimits = stepElement.querySelectorAll('input[maxlength], textarea[maxlength]');
             let stepValid = true;
             
             requiredFields.forEach(field => {
@@ -570,6 +651,26 @@ function validateAllSteps() {
                     if (!field.value.trim()) {
                         fieldValid = false;
                         stepValid = false;
+                    } else {
+                        // Check character limits for text/textarea fields
+                        if (characterLimits[field.id] && field.value.length > characterLimits[field.id]) {
+                            fieldValid = false;
+                            stepValid = false;
+                        } else if (field.id === 'contactCellphone') {
+                            // Check cellphone digit count
+                            const digitCount = (field.value.match(/\d/g) || []).length;
+                            if (digitCount > 11) {
+                                fieldValid = false;
+                                stepValid = false;
+                            }
+                        } else if (field.id === 'contactTelephone' && field.value.trim()) {
+                            // Check telephone digit count (only if field has value since it's optional)
+                            const digitCount = (field.value.match(/\d/g) || []).length;
+                            if (digitCount > 12) {
+                                fieldValid = false;
+                                stepValid = false;
+                            }
+                        }
                     }
                 }
                 
@@ -579,6 +680,28 @@ function validateAllSteps() {
                     // Red border removed for better visual
                 } else {
                     field.classList.remove('error');
+                }
+            });
+            
+            // Also validate optional fields with character limits if they have values
+            optionalFieldsWithLimits.forEach(field => {
+                // Skip if field is already required (already validated above)
+                if (field.hasAttribute('required')) {
+                    return;
+                }
+                
+                // Only validate if field has a value
+                if (field.value.trim()) {
+                    if (characterLimits[field.id] && field.value.length > characterLimits[field.id]) {
+                        field.classList.add('error');
+                        stepValid = false;
+                        allValid = false;
+                        if (!firstInvalidStep) {
+                            firstInvalidStep = i;
+                        }
+                    } else {
+                        field.classList.remove('error');
+                    }
                 }
             });
             
@@ -854,6 +977,147 @@ document.addEventListener('keydown', function(e) {
         }
     }
 });
+
+// Setup character limit validation and counters
+function setupCharacterLimitValidation() {
+    // Character limits for all text/textarea fields
+    const characterLimits = {
+        // Step 1: Event Info
+        'eventTitle': 200,
+        'eventDuration': 100,
+        'eventVenue': 200,
+        // Step 2: Event Profile Sheet
+        'contactName': 100,
+        'contactAddress': 200,
+        'organizerBackground': 1000,
+        // Step 3: Event Details
+        'eventDescription': 1500,
+        'audienceProfile': 1000,
+        'guestsList': 1000,
+        'vipsList': 1000
+    };
+    
+    // Initialize counters and add event listeners
+    Object.keys(characterLimits).forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        const counter = document.getElementById(fieldId + 'Counter');
+        
+        if (field && counter) {
+            const maxLength = characterLimits[fieldId];
+            
+            // Update counter on input
+            field.addEventListener('input', function() {
+                const currentLength = this.value.length;
+                counter.textContent = `${currentLength} / ${maxLength} characters`;
+                
+                // Update counter styling based on length
+                counter.classList.remove('warning', 'error');
+                if (currentLength >= maxLength) {
+                    counter.classList.add('error');
+                } else if (currentLength >= maxLength * 0.9) {
+                    counter.classList.add('warning');
+                }
+            });
+            
+            // Initialize counter on page load
+            const currentLength = field.value.length;
+            counter.textContent = `${currentLength} / ${maxLength} characters`;
+            if (currentLength >= maxLength) {
+                counter.classList.add('error');
+            } else if (currentLength >= maxLength * 0.9) {
+                counter.classList.add('warning');
+            }
+        }
+    });
+}
+
+// Validate character limits for a specific field
+function validateCharacterLimit(fieldId, maxLength) {
+    const field = document.getElementById(fieldId);
+    if (!field) return true;
+    
+    const value = field.value.trim();
+    if (value.length > maxLength) {
+        field.classList.add('error');
+        showToast(`${field.previousElementSibling?.textContent?.trim() || 'Field'} exceeds the maximum length of ${maxLength} characters`, 'error');
+        return false;
+    }
+    return true;
+}
+
+// Setup phone number validation with digit counting
+function setupPhoneNumberValidation() {
+    // Phone number limits (digits only, not including formatting)
+    const phoneLimits = {
+        'contactCellphone': 11,  // Max 11 digits for cellphone
+        'contactTelephone': 12   // Max 12 digits for telephone (allows for area codes and formatting)
+    };
+    
+    Object.keys(phoneLimits).forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        const counter = document.getElementById(fieldId + 'Counter');
+        
+        if (field && counter) {
+            const maxDigits = phoneLimits[fieldId];
+            
+            // Function to count digits in a string
+            const countDigits = (str) => {
+                return (str.match(/\d/g) || []).length;
+            };
+            
+            // Update counter on input
+            field.addEventListener('input', function() {
+                const digitCount = countDigits(this.value);
+                counter.textContent = `${digitCount} / ${maxDigits} digits`;
+                
+                // Update counter styling based on digit count
+                counter.classList.remove('warning', 'error');
+                if (digitCount > maxDigits) {
+                    counter.classList.add('error');
+                } else if (digitCount >= maxDigits * 0.9) {
+                    counter.classList.add('warning');
+                }
+            });
+            
+            // Initialize counter on page load
+            const digitCount = countDigits(field.value);
+            counter.textContent = `${digitCount} / ${maxDigits} digits`;
+            if (digitCount > maxDigits) {
+                counter.classList.add('error');
+            } else if (digitCount >= maxDigits * 0.9) {
+                counter.classList.add('warning');
+            }
+        }
+    });
+}
+
+// Validate phone number digit count
+function validatePhoneNumber(fieldId, maxDigits) {
+    const field = document.getElementById(fieldId);
+    if (!field) return true;
+    
+    const value = field.value.trim();
+    if (!value) {
+        // If field is optional (telephone), empty is valid
+        if (fieldId === 'contactTelephone') {
+            return true;
+        }
+        // If field is required (cellphone), empty is invalid
+        return false;
+    }
+    
+    // Count only digits
+    const digitCount = (value.match(/\d/g) || []).length;
+    
+    if (digitCount > maxDigits) {
+        field.classList.add('error');
+        const fieldName = fieldId === 'contactCellphone' ? 'Cellphone Number' : 'Telephone Number';
+        showToast(`${fieldName} must not exceed ${maxDigits} digits`, 'error');
+        return false;
+    }
+    
+    return true;
+}
 
 // Setup number-only validation for fields that should only accept numbers
 function setupNumberOnlyValidation() {

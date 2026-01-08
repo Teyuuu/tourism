@@ -143,7 +143,8 @@
                         <div class="form-grid">
                             <div class="form-group full-width">
                                 <label for="eventTitle">Title of Event <span class="required">*</span></label>
-                                <input type="text" id="eventTitle" name="eventTitle" placeholder="Enter event title" required>
+                                <input type="text" id="eventTitle" name="eventTitle" placeholder="Enter event title" maxlength="200" required>
+                                <span class="char-counter" id="eventTitleCounter">0 / 200 characters</span>
                             </div>
                             
                             <div class="form-group">
@@ -172,12 +173,14 @@
                             
                             <div class="form-group">
                                 <label for="eventDuration">Duration of Event <span class="required">*</span></label>
-                                <input type="text" id="eventDuration" name="eventDuration" placeholder="e.g., 3 hours, 2 days" required>
+                                <input type="text" id="eventDuration" name="eventDuration" placeholder="e.g., 3 hours, 2 days" maxlength="100" required>
+                                <span class="char-counter" id="eventDurationCounter">0 / 100 characters</span>
                             </div>
                             
                             <div class="form-group">
                                 <label for="eventVenue">Venue (Exact) <span class="required">*</span></label>
-                                <input type="text" id="eventVenue" name="eventVenue" placeholder="Exact venue location" required>
+                                <input type="text" id="eventVenue" name="eventVenue" placeholder="Exact venue location" maxlength="200" required>
+                                <span class="char-counter" id="eventVenueCounter">0 / 200 characters</span>
                             </div>
                         </div>
                     </div>
@@ -199,12 +202,14 @@
                         <div class="form-grid">
                             <div class="form-group full-width">
                                 <label for="contactName">Name of Contact Person <span class="required">*</span></label>
-                                <input type="text" id="contactName" name="contactName" placeholder="Full name" required>
+                                <input type="text" id="contactName" name="contactName" placeholder="Full name" maxlength="100" required>
+                                <span class="char-counter" id="contactNameCounter">0 / 100 characters</span>
                             </div>
                             
                             <div class="form-group full-width">
                                 <label for="contactAddress">Address of Contact Person <span class="required">*</span></label>
-                                <input type="text" id="contactAddress" name="contactAddress" placeholder="Complete address" required>
+                                <input type="text" id="contactAddress" name="contactAddress" placeholder="Complete address" maxlength="200" required>
+                                <span class="char-counter" id="contactAddressCounter">0 / 200 characters</span>
                             </div>
                             
                             <div class="form-group">
@@ -214,17 +219,20 @@
                             
                             <div class="form-group">
                                 <label for="contactCellphone">Cellphone Number of Contact Person <span class="required">*</span></label>
-                                <input type="tel" id="contactCellphone" name="contactCellphone" placeholder="09XX XXX XXXX" required>
+                                <input type="tel" id="contactCellphone" name="contactCellphone" placeholder="09XX XXX XXXX" maxlength="15" required>
+                                <span class="char-counter" id="contactCellphoneCounter">0 / 11 digits</span>
                             </div>
                             
                             <div class="form-group full-width">
                                 <label for="contactTelephone">Telephone Number of Contact Person <span class="optional">(Optional)</span></label>
-                                <input type="tel" id="contactTelephone" name="contactTelephone" placeholder="Telephone number">
+                                <input type="tel" id="contactTelephone" name="contactTelephone" placeholder="Telephone number" maxlength="15">
+                                <span class="char-counter" id="contactTelephoneCounter">0 / 12 digits</span>
                             </div>
                             
                             <div class="form-group full-width">
                                 <label for="organizerBackground">Background of Organizer/Organization <span class="required">*</span></label>
-                                <textarea id="organizerBackground" name="organizerBackground" rows="4" placeholder="Provide background information about the organizer or organization" required></textarea>
+                                <textarea id="organizerBackground" name="organizerBackground" rows="4" placeholder="Provide background information about the organizer or organization" maxlength="1000" required></textarea>
+                                <span class="char-counter" id="organizerBackgroundCounter">0 / 1000 characters</span>
                             </div>
                         </div>
                     </div>
@@ -247,25 +255,29 @@
                             <div class="form-group full-width">
                                 <label for="eventDescription">Background / Description of Event <span class="required">*</span></label>
                                 <p class="field-hint">Provide a detailed description of your event</p>
-                                <textarea id="eventDescription" name="eventDescription" rows="4" placeholder="Enter event description" required></textarea>
+                                <textarea id="eventDescription" name="eventDescription" rows="4" placeholder="Enter event description" maxlength="1500" required></textarea>
+                                <span class="char-counter" id="eventDescriptionCounter">0 / 1500 characters</span>
                             </div>
                             
                             <div class="form-group full-width">
                                 <label for="audienceProfile">Audience Profile (Please include expected number of guests) <span class="required">*</span></label>
                                 <p class="field-hint">Describe your target audience and expected number of attendees</p>
-                                <textarea id="audienceProfile" name="audienceProfile" rows="4" placeholder="Enter audience profile" required></textarea>
+                                <textarea id="audienceProfile" name="audienceProfile" rows="4" placeholder="Enter audience profile" maxlength="1000" required></textarea>
+                                <span class="char-counter" id="audienceProfileCounter">0 / 1000 characters</span>
                             </div>
                             
                             <div class="form-group full-width">
                                 <label for="guestsList">List of Guests Attending <span class="required">*</span></label>
                                 <p class="field-hint">Provide a list or description of guests attending</p>
-                                <textarea id="guestsList" name="guestsList" rows="4" placeholder="Enter list of guests" required></textarea>
+                                <textarea id="guestsList" name="guestsList" rows="4" placeholder="Enter list of guests" maxlength="1000" required></textarea>
+                                <span class="char-counter" id="guestsListCounter">0 / 1000 characters</span>
                             </div>
                             
                             <div class="form-group full-width">
                                 <label for="vipsList">List of VIPs Attending (if any)</label>
                                 <p class="field-hint">List any VIP guests (optional)</p>
-                                <textarea id="vipsList" name="vipsList" rows="4" placeholder="Enter list of VIPs"></textarea>
+                                <textarea id="vipsList" name="vipsList" rows="4" placeholder="Enter list of VIPs" maxlength="1000"></textarea>
+                                <span class="char-counter" id="vipsListCounter">0 / 1000 characters</span>
                             </div>
                             
                             <div class="form-group full-width">
