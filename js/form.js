@@ -83,6 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (emailInput.value.trim()) {
                 hideError('emailError');
                 emailInput.classList.remove('error');
+                // Remove error class from parent form-group if exists
+                emailInput.closest('.form-group')?.classList.remove('error');
             }
             checkAndProceed();
         });
@@ -256,6 +258,9 @@ function initializeForm() {
     
     // Setup phone number validation
     setupPhoneNumberValidation();
+    
+    // Setup real-time validation feedback
+    setupRealTimeValidation();
     
     // Form submission
     const form = document.getElementById('eventApplicationForm');
@@ -513,9 +518,14 @@ function validateCurrentStep() {
     });
     
     if (!isValid) {
+        // Scroll to first invalid field
+        highlightInvalidFields(currentStep);
         if (!document.querySelector('.form-step[data-step="' + currentStep + '"] .form-group input.error, .form-step[data-step="' + currentStep + '"] .form-group textarea.error')) {
             showToast('Please fill in all required fields', 'error');
         }
+    } else {
+        // Remove all error highlights from current step
+        clearErrorHighlights(currentStep);
     }
     
     return isValid;
@@ -618,6 +628,8 @@ function handleFormSubmit(e) {
     
     // Validate all steps first
     if (!validateAllSteps()) {
+        // Highlight invalid fields and scroll to first error
+        highlightAllInvalidFields();
         return;
     }
     
@@ -765,6 +777,73 @@ function validateAllSteps() {
     }
     
     return true;
+}
+
+// Highlight invalid fields in a specific step and scroll to first error
+function highlightInvalidFields(stepNumber) {
+    const stepElement = document.querySelector(`.form-step[data-step="${stepNumber}"]`);
+    if (!stepElement) return;
+    
+    // Find first invalid field
+    const firstInvalidField = stepElement.querySelector('.form-group.error input, .form-group.error textarea, input.error, textarea.error, .form-group.error input[type="file"]');
+    
+    if (firstInvalidField) {
+        // Scroll to the invalid field with smooth behavior
+        setTimeout(() => {
+            firstInvalidField.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center',
+                inline: 'nearest'
+            });
+            
+            // Focus on the field if it's not a file input or radio
+            if (firstInvalidField.type !== 'file' && firstInvalidField.type !== 'radio') {
+                firstInvalidField.focus();
+            }
+        }, 100);
+    }
+}
+
+// Clear error highlights from a specific step
+function clearErrorHighlights(stepNumber) {
+    const stepElement = document.querySelector(`.form-step[data-step="${stepNumber}"]`);
+    if (!stepElement) return;
+    
+    stepElement.querySelectorAll('.form-group.error, input.error, textarea.error').forEach(element => {
+        element.classList.remove('error');
+    });
+}
+
+// Highlight all invalid fields across all steps
+function highlightAllInvalidFields() {
+    let firstInvalidField = null;
+    
+    for (let i = 1; i <= totalSteps; i++) {
+        const stepElement = document.querySelector(`.form-step[data-step="${i}"]`);
+        if (!stepElement) continue;
+        
+        const invalidFields = stepElement.querySelectorAll('.form-group.error input, .form-group.error textarea, input.error, textarea.error, .form-group.error input[type="file"]');
+        
+        if (invalidFields.length > 0 && !firstInvalidField) {
+            firstInvalidField = invalidFields[0];
+        }
+    }
+    
+    if (firstInvalidField) {
+        // Scroll to the first invalid field
+        setTimeout(() => {
+            firstInvalidField.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center',
+                inline: 'nearest'
+            });
+            
+            // Focus on the field if it's not a file input or radio
+            if (firstInvalidField.type !== 'file' && firstInvalidField.type !== 'radio') {
+                firstInvalidField.focus();
+            }
+        }, 300);
+    }
 }
 
 // Show confirmation modal
@@ -1122,6 +1201,44 @@ function setupPhoneNumberValidation() {
                 counter.classList.add('warning');
             }
         }
+    });
+}
+
+// Setup real-time validation feedback - remove error class when user starts typing
+function setupRealTimeValidation() {
+    // Get all form inputs and textareas
+    const formFields = document.querySelectorAll('#eventApplicationForm input, #eventApplicationForm textarea');
+    
+    formFields.forEach(field => {
+        // Skip radio buttons and file inputs for input event
+        if (field.type === 'radio' || field.type === 'file') return;
+        
+        // Remove error class when user starts typing
+        field.addEventListener('input', () => {
+            if (field.value.trim()) {
+                field.classList.remove('error');
+                field.closest('.form-group')?.classList.remove('error');
+            }
+        });
+        
+        // Remove error class on blur if field is valid
+        field.addEventListener('blur', () => {
+            if (field.value.trim() && field.checkValidity()) {
+                field.classList.remove('error');
+                field.closest('.form-group')?.classList.remove('error');
+            }
+        });
+    });
+    
+    // Handle file inputs separately
+    const fileInputs = document.querySelectorAll('#eventApplicationForm input[type="file"]');
+    fileInputs.forEach(fileInput => {
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files && fileInput.files.length > 0) {
+                fileInput.classList.remove('error');
+                fileInput.closest('.form-group')?.classList.remove('error');
+            }
+        });
     });
 }
 

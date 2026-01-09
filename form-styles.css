@@ -396,12 +396,15 @@
     align-items: center;
     justify-content: center;
     color: #014696;
+    flex-shrink: 0;
+    line-height: 1;
 }
 
 .form-icon svg {
     width: 24px;
     height: 24px;
     color: inherit;
+    display: block;
 }
 
 .form-card-title {
@@ -465,6 +468,47 @@
     outline: none;
     border-color: #014696;
     box-shadow: 0 0 0 3px rgba(1, 70, 150, 0.1);
+}
+
+/* Error highlighting for invalid fields */
+.form-group.error input,
+.form-group.error textarea,
+.form-group input.error,
+.form-group textarea.error {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    animation: shake 0.4s ease;
+}
+
+.form-group.error input:focus,
+.form-group.error textarea:focus,
+.form-group input.error:focus,
+.form-group textarea.error:focus {
+    border-color: #ef4444;
+    background-color: #fee2e2;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.form-group.error label {
+    color: #dc2626;
+}
+
+.form-group.error input[type="file"] {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
 }
 
 .form-group textarea {
@@ -615,11 +659,32 @@
     border-radius: 8px;
     background: #f9fafb;
     cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .form-group input[type="file"]:hover {
     border-color: #014696;
     background: #f0f4ff;
+}
+
+.form-group input[type="file"]::-webkit-file-upload-button {
+    margin-right: 10px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background: #014696;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-group input[type="file"]::-webkit-file-upload-button:hover {
+    background: #013a7a;
 }
 
 /* Form Note */
@@ -1061,21 +1126,39 @@
     }
 
     .progress-indicator {
-        gap: 5px;
+        gap: 3px;
+        padding: 0 10px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .progress-indicator::-webkit-scrollbar {
+        display: none;
+    }
+
+    .progress-step {
+        flex-shrink: 0;
+        min-width: 60px;
     }
 
     .step-circle {
-        width: 35px;
-        height: 35px;
-        font-size: 14px;
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
     }
 
     .step-label {
-        font-size: 11px;
+        font-size: 10px;
+        white-space: nowrap;
+        text-align: center;
     }
 
     .progress-line {
-        width: 40px;
+        width: 25px;
+        min-width: 25px;
+        flex-shrink: 0;
     }
 
     .form-card {
@@ -1089,6 +1172,17 @@
     .form-grid {
         grid-template-columns: 1fr;
         gap: 15px;
+    }
+
+    .form-group input[type="file"] {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .form-group input[type="file"]::-webkit-file-upload-button {
+        font-size: 12px;
+        padding: 5px 10px;
+        margin-right: 8px;
     }
 
     .form-navigation {
@@ -1136,6 +1230,35 @@
 
     .form-card-title {
         font-size: 18px;
+    }
+
+    .progress-indicator {
+        gap: 2px;
+        padding: 0 5px;
+    }
+
+    .step-circle {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .step-label {
+        font-size: 9px;
+    }
+
+    .progress-line {
+        width: 20px;
+        min-width: 20px;
+    }
+
+    .form-icon {
+        font-size: 20px;
+    }
+
+    .form-icon svg {
+        width: 20px;
+        height: 20px;
     }
 
     .success-card {
