@@ -1508,6 +1508,8 @@ body {
 
     .hamburger-menu {
         display: flex;
+        position: relative;
+        z-index: 1002;
     }
 
     .nav-links {
@@ -1520,7 +1522,7 @@ body {
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        padding: 80px 30px 30px;
+        padding: 120px 30px 30px;
         gap: 20px;
         transition: right 0.3s ease;
         box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
